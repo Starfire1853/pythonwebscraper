@@ -62,3 +62,5 @@ enve7/
 env37/
 
 \.vscode/
+
+variables\.py
