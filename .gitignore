@@ -58,7 +58,6 @@ docs/_build/
 target/
 
 # virtual enviroments
-enve7/
 env37/
 
 \.vscode/
