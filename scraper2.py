@@ -11,11 +11,18 @@ req = requests.get(variables.url)
 
 soup = BeautifulSoup(req.content, 'html.parser')
 
-print(soup.prettify())
+# print(soup.prettify())
 
 print("-------------------------------")
 
-print(soup.find_all("p"))
+# print(soup.find_all("p"))
+
+
+workoutblocks = soup.findAll("div", {"class": "e-content"})
+print(workoutblocks)
+soup.prettify(workoutblocks)
+print("-------------------------------")
+
 # client = Client(variables.account_sid, variables.auth_token)
 # message = client.messages.create(
 #     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
