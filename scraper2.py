@@ -18,11 +18,12 @@ print("-------------------------------")
 # print(soup.find_all("p"))
 
 
-workoutblocks = soup.findAll("div", {"class": "e-content"})
+workoutblocks = soup.find("div", {"class": "e-content"})
 print(workoutblocks)
-soup.prettify(workoutblocks)
 print("-------------------------------")
-
+for div_tag in workoutblocks:
+    print(div_tag.text, div_tag.next_sibling)
+print("-------------------------------")
 # client = Client(variables.account_sid, variables.auth_token)
 # message = client.messages.create(
 #     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
