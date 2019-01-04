@@ -15,8 +15,7 @@ text = ""
 
 
 def getsite():
-    global soup
-    global workoutblocks
+    global soup, workoutblocks
     req = requests.get(variables.url)
     soup = BeautifulSoup(req.content, 'html.parser')
     workoutblocks = soup.find("div", {"class": "e-content"}).findChildren("p")
@@ -27,10 +26,7 @@ def message():
 
 
 def checkchange():
-    global soup
-    global workoutblocks
-    global checknumber
-    global text
+    global soup, text, workoutblocks, checknumber
     checknumber += 1
     if checknumber >= 5:
         quit()

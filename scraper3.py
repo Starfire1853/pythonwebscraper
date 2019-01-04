@@ -9,6 +9,23 @@ import time
 
 header = ""
 checknumber = 0
+repeattime = 0
+repeatnumber = 0
+
+
+def getrepeattime():
+    global repeatnumber, repeattime
+    repeatnumberin = (input("How many times should this repeat? ") or 5)
+    repeattimein = (input(
+        "How long between each repeat in minutes? (Equal or greater than 1 minute) ") or 1)
+    if repeatnumberin < 1:
+        repeatnumber = 1
+    else:
+        repeatnumber = int(repeatnumberin)
+    if repeattimein < 1:
+        repeattime = 1
+    else:
+        repeattime = int(repeattimein)
 
 
 def getsite():
@@ -17,16 +34,10 @@ def getsite():
     soup = BeautifulSoup(req.content, 'html.parser')
 
 
-def message():
-    print("Working")
-
-
 def checkchange():
-    global soup
-    global header
-    global checknumber
+    global soup, header, checknumber
     checknumber += 1
-    if checknumber >= 5:
+    if checknumber >= repeatnumber:
         quit()
     oldheader = header
     getsite()
@@ -50,7 +61,8 @@ def texter(text):
     print(message.sid)
 
 
-schedule.every(1).minutes.do(checkchange)
+getrepeattime()
+schedule.every(repeattime).minutes.do(checkchange)
 
 
 while 1:
