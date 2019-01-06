@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import variables
 import twilio
 from twilio.rest import Client
 import html2text
@@ -26,7 +25,7 @@ import yaml
 #         print("I am " + self.name)
 
 
-def UpdateChecker(url, element, repeatNum,):
+def UpdateChecker(url, element, repeatNum):
     print(url, element, repeatNum)
 
 
@@ -36,8 +35,13 @@ def Messager(twilioSID, twilioAuth, twilioPhone, userPhone, message):
 
 def user_functions(user_dict_name):
     print(user_dict_name)
-    Messager(yamldata[user_dict_name]["twilioSID"], yamldata[user_dict_name]["twilioAuth"],
-             yamldata[user_dict_name]["twilioPhone"], yamldata[user_dict_name]["userPhone"], "YEET, IT WORKS!")
+    Messager(
+        yamldata[user_dict_name]["twilioSID"],
+        yamldata[user_dict_name]["twilioAuth"],
+        yamldata[user_dict_name]["twilioPhone"],
+        yamldata[user_dict_name]["userPhone"],
+        "YEET, IT WORKS!",
+    )
 
 
 def time_delay(user_dict_name):
@@ -49,7 +53,7 @@ def time_delay(user_dict_name):
 # opens the yaml user file and reads it into a dict
 if os.path.isfile("users.yaml"):
     print("its exists")
-    with open("users.yaml", 'r') as yamlfile:
+    with open("users.yaml", "r") as yamlfile:
         yamldata = yaml.safe_load(yamlfile)
 else:
     f = open("users.yaml", "a+")
