@@ -54,10 +54,12 @@ def users(number_of_users):
                 input("Name of User: "),
                 input("Url to watch: "),
                 input("What element to watch for (ex. h1): "),
-                input(
-                    "How often do you want to repeat the check (in minutes, default is 1): "
+                int(
+                    input(
+                        "How often do you want to repeat the check (in minutes, default is 1): "
+                    )
                 ),
-                input("Times it repeats the check: "),
+                int(input("Times it repeats the check: ")),
                 input("Twilio SID: "),
                 input("Twilio auth token: "),
                 input("Twilio phone number: "),
@@ -76,7 +78,7 @@ def users(number_of_users):
 
 
 def yaml_dumper(dict):
-    yaml_file = open("users1.yaml", "w+")
+    yaml_file = open("users.yaml", "w+")
     yaml.dump(dict, yaml_file)
 
 
@@ -94,14 +96,14 @@ def fill_file(change_type):
 
 def create_file():
     print("Creating file")
-    yaml_file = open("users1.yaml", "w+")
+    yaml_file = open("users.yaml", "w+")
     yaml_file.close()
     fill_file("f")
 
 
 def main():
-    exists = os.path.isfile("user1s.yaml")
-    if exists:
+    # exists = os.path.isfile("users.yaml")
+    if os.path.exists("users.yaml"):
         print("Exists")
         fill_file(
             input(
