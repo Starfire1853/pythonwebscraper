@@ -11,6 +11,19 @@ import requests
 import html2text
 
 
+def main():
+    yaml_loader("users.yaml")
+    print(time.asctime())
+
+    for j in yaml_data:
+        run_threaded(j)
+        time.sleep(15)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
 def yaml_loader(users_yaml_file):
     global yaml_data
     if os.path.exists(users_yaml_file):
@@ -31,6 +44,24 @@ def yaml_loader(users_yaml_file):
             user_init.main()
         else:
             exit()
+
+
+def run_threaded(user_dict_name):
+    job_thread = threading.Thread(None, time_delay, args=(user_dict_name,))
+    job_thread.start()
+
+
+def time_delay(user_dict_name):
+    schedule.every(int(yaml_data[user_dict_name]["repeat_rate"])).seconds.do(
+        user_functions, user_dict_name
+    )
+
+
+def user_functions(user_dict_name):
+
+    if check_changes(user_dict_name):
+        return schedule.CancelJob
+    print(user_dict_name)
 
 
 def check_changes(user_dict_name):
@@ -60,19 +91,6 @@ def get_site(user_dict_name):
     return soup
 
 
-def time_delay(user_dict_name):
-    schedule.every(int(yaml_data[user_dict_name]["repeat_rate"])).seconds.do(
-        user_functions, user_dict_name
-    )
-
-
-def user_functions(user_dict_name):
-
-    if check_changes(user_dict_name):
-        return schedule.CancelJob
-    print(user_dict_name)
-
-
 def messager(user_dict_name, message):
     twilio_sid = yaml_data[user_dict_name]["twilio_sid"]
     twilio_auth = yaml_data[user_dict_name]["twilio_auth"]
@@ -83,24 +101,6 @@ def messager(user_dict_name, message):
     message = client.messages.create(body=message, from_=twilio_phone, to=user_phone)
     print(time.asctime())
     print(message.sid)
-
-
-def run_threaded(user_dict_name):
-    job_thread = threading.Thread(None, time_delay, args=(user_dict_name,))
-    job_thread.start()
-
-
-def main():
-    yaml_loader("users.yaml")
-    print(time.asctime())
-
-    for j in yaml_data:
-        run_threaded(j)
-        time.sleep(15)
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
 
 
 if __name__ == "__main__":
