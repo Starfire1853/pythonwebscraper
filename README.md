@@ -1,4 +1,4 @@
-# pythonwebscraper
+# Python Webscraper
 
 The purpose of this webscraper is to be able to monitor a website for changes, then text a phone using twilio if any changes exist.
 The program supports multiple websites and twilio accounts running at the same time.
