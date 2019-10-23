@@ -5,7 +5,8 @@ The program supports multiple websites and Twilio accounts running at the same t
 
 ## How to use
 
-1. Create a `users.yaml` file that contains the website you want to scrape and the Twilio account details. This can be done by running `user_init.py` from the command line and chosing `e`. Alternatively, you can create the file yourself. The file must contain the following:
+1. LYNN WAS HERE
+Create a `users.yaml` file that contains the website you want to scrape and the Twilio account details. This can be done by running `user_init.py` from the command line and chosing `e`. Alternatively, you can create the file yourself. The file must contain the following:
 
    ```yaml
    User0:
